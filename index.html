@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeflax — Soluções Digitais Inteligentes</title>
+  <style>
+    * {
+  box-sizing: border-box;
+}
+
+    body {
+      margin: 0;
+      font-family: Segoe UI, sans-serif;
+      background: #0e0e12;
+      color: #fff;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: #f0e7e8;
+      font-size: 30px;
+      cursor: pointer;
+      display: none;
+    }
+header nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  header nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #121217;
+    position: absolute;
+    right: 0;
+    width: 100vw;
+    top: 70px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+
+  header nav ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+
+    .checkbox-btn input {
+      display: none;
+    }
+
+    .checkbox-btn span {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background-color: #1e1e26;
+      color: #ccc;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .checkbox-btn input:checked + span {
+      background: linear-gradient(90deg, #018ff1, #00b0ff);
+      color: #0e0e12;
+      font-weight: bold;
+      border-color: #00b0ff;
+    }
+
+    .checkbox-btn span:hover {
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+<body>
+<header style="display:flex; justify-content:space-between; align-items:center; padding:20px 5vw; background-color:#121217; position:fixed; top:0; left:0; width:100%; z-index:1000;">
+  <div>
+    <img src="imglogo/logocodeflax.png" alt="Logo da Codeflax" style="height: 40px;">
+  </div>
+  <nav>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('active')">☰</button>
+    <ul>
+      <li><a href="#sobre" style="color:#ccc; text-decoration:none; font-weight:500;">Sobre</a></li>
+      <li><a href="#servicos" style="color:#ccc; text-decoration:none; font-weight:500;">Serviços</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+  <!-- HERO COM VÍDEO HTML PURO -->
+<section id="hero" style="position:relative; min-height:100vh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:120px 5vw 60px;">
+   <video autoplay muted loop playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.4;">
+  <source src="imgbanner/video.mp4" type="video/mp4">
+</video>
+
+    <h1 style="font-size:3rem; text-shadow:0 2px 10px rgba(0,0,0,0.5); max-width:700px; z-index:1;">
+      Construímos sistemas e sites inteligentes
+    </h1>
+    <p style="font-size:1.2rem; color:#ccc; max-width:700px; z-index:1;">
+      Sites, automações e soluções digitais com tecnologia de ponta.
+    </p>
+
+    <a href="#contato" style="background:#eff5f5; color:#0e0e12; padding:12px 25px; border-radius:30px; font-weight:bold; text-decoration:none; margin-top:20px; z-index:1;">
+      Fale com a gente
+    </a>
+  </section>
+  <!-- SEÇÃO SOBRE NÓS ESTÁTICA -->
+<section id="sobre" style="background: #0e0e12; padding: 100px 20px; display: flex; justify-content: center;">
+<div class="card-sobre fade-in" id="cardSobre">
+    <h2>Sobre a Flaxprime</h2>
+    <p>
+      Na <strong>Flaxprime</strong>, desenvolvemos soluções digitais que conectam <span class="destaque">tecnologia, estratégia e design</span>. Criamos sites, landing pages, sistemas com banco de dados e plataformas SaaS sob medida para quem quer evoluir no digital de forma inteligente.
+    </p>
+    <p>
+      Somos também especialistas em <strong>tráfego pago</strong>, garantindo que cada projeto não só funcione — mas alcance, engaje e converta. Atuamos com foco em performance, experiência do usuário e inovação contínua.
+    </p>
+    <p class="assinatura">Se é digital, a Flaxprime executa.</p>
+  </div>
+</section>
+
+
+  <!-- SEÇÕES INJETADAS VIA JS -->
+  <script>
+    function criarElemento(tag, conteudo, estilo = {}) {
+      const el = document.createElement(tag);
+      if (conteudo) el.innerHTML = conteudo;
+      Object.assign(el.style, estilo);
+      return el;
+    }
+
+    function criarSecao(id, titulo, texto) {
+      const section = criarElemento("section", "", {
+        padding: "80px 40px",
+        maxWidth: "1000px",
+        margin: "auto"
+      });
+      section.id = id;
+
+      const h2 = criarElemento("h2", titulo, {
+        fontSize: "2rem",
+        marginBottom: "20px",
+        color: "#018ff1"
+      });
+
+      const p = criarElemento("p", texto, {
+        color: "#ccc"
+      });
+
+      section.appendChild(h2);
+      section.appendChild(p);
+      document.body.appendChild(section);
+    }
+
+
+
+    // WHATSAPP BOTÃO FIXO
+    const waBtn = document.createElement("div");
+    Object.assign(waBtn.style, {
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      width: "60px",
+      height: "60px",
+      backgroundColor: "#25D366",
+      borderRadius: "50%",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.4)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "pointer",
+      zIndex: "9999"
+    });
+
+    const waIcon = document.createElement("img");
+    waIcon.src = "https://cdn-icons-png.flaticon.com/512/733/733585.png";
+    waIcon.alt = "WhatsApp";
+    waIcon.style.width = "35px";
+    waIcon.style.height = "35px";
+    waBtn.appendChild(waIcon);
+    waBtn.onclick = () => {
+      const numero = "5515981703200";
+      const mensagem = encodeURIComponent("Olá! Vim pelo site da Codeflax.");
+      window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
+    };
+    document.body.appendChild(waBtn);
+  </script>
+
+ <!-- SEÇÃO: NOSSOS SERVIÇOS -->
+<section id="servicos" style="padding: 80px 20px; background: #0e0e12; text-align: center;">
+  <h2 style="font-size: 2rem; color: #018ff1; margin-bottom: 40px;">Nossos Serviços</h2>
+
+  <div class="cards-container">
+    <!-- CARD 1 -->
+    <div class="card">
+      <h3>Gestão de Tráfego Pago</h3>
+      <p>Impulsione seus resultados com campanhas estratégicas que realmente convertem.</p>
+      <ul>
+        <li>Anúncios otimizados no Google e redes sociais</li>
+        <li>Leads qualificados com foco em resultado</li>
+        <li>Relatórios claros e acompanhamento em tempo real</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Gestão de Tráfego Pago')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+      <h3>Criação de Sites</h3>
+      <p>Sites rápidos, bonitos e inteligentes, feitos sob medida pro seu negócio crescer online.</p>
+      <ul>
+        <li>Design responsivo e personalizado</li>
+        <li>Alta performance e segurança</li>
+        <li>Integrações com redes sociais e WhatsApp</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Criação de Sites')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+      <h3>Site Institucional</h3>
+      <p>Construa presença digital com autoridade e profissionalismo.</p>
+      <ul>
+        <li>Ideal para empresas apresentarem seus serviços</li>
+        <li>Inclui seções como Sobre, Serviços, Contato</li>
+        <li>Transmite credibilidade e confiança</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Site Institucional')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card">
+      <h3>Landing Page</h3>
+      <p>Página estratégica com foco 100% em conversão. Perfeita pra anúncios.</p>
+      <ul>
+        <li>Alta taxa de conversão</li>
+        <li>Chamada clara pra ação (CTA)</li>
+        <li>Perfeita pra vender ou captar leads</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Landing Page')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card">
+      <h3>Portfólio Empresarial</h3>
+      <p>Mostre o que sua empresa já fez com estilo e impacto visual.</p>
+      <ul>
+        <li>Galeria de projetos organizada</li>
+        <li>Design que valoriza seu trabalho</li>
+        <li>Ideal para prestadores de serviço</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Portfólio Empresarial')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card">
+      <h3>Sistema com Banco de Dados</h3>
+      <p>Automatize, organize e tenha controle dos dados da sua empresa em tempo real.</p>
+      <ul>
+        <li>Soluções sob medida para sua operação</li>
+        <li>Segurança e escalabilidade</li>
+        <li>Gerenciamento fácil e eficiente</li>
+      </ul>
+      <button onclick="enviarWhatsApp('Sistema com Banco de Dados')">Quero esse serviço</button>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="card">
+      <h3>Precisa de algo específico?</h3>
+      <p>Nem todo projeto cabe numa caixinha pronta.  
+      Se o que você precisa é único, estamos prontos pra criar sob medida.</p>
+      <button onclick="enviarWhatsApp('Projeto Personalizado')">Quero esse serviço</button>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-container">
+    <!-- COLUNA 1: LOGO -->
+    <div class="footer-col">
+      <img src="imglogo/logocodeflax.png" alt="Flaxprime Logo" class="footer-logo">
+      <p class="footer-slogan">Soluções digitais inteligentes.</p>
+    </div>
+
+    <!-- COLUNA 2: NAVEGAÇÃO -->
+    <div class="footer-col">
+      <h4>Links rápidos</h4>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUNA 3: CONTATO -->
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <p>📞 (15) 98170-3200<br>
+      ✉️ contato@flaxprime.com<br>
+      📍 Sorocaba - SP</p>
+      <div class="footer-redes">
+        <a href="https://wa.me/5515981703200" target="_blank">WhatsApp</a> |
+        <a href="https://www.instagram.com/flaxprime?igsh=cnF6emoycm1ncXY3" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © <span id="ano"></span> Flaxprime. Todos os direitos reservados.
+  </div>
+</footer>
+
+<style>
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+  }
+
+  .card {
+    background-color: #1a1a1f;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(1, 143, 241, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card h3 {
+    color: #018ff1;
+    margin-bottom: 10px;
+  }
+
+  .card ul {
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card button {
+    background-color: #018ff1;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .card button:hover {
+    background-color: #026bb8;
+  }
+
+  @media (max-width: 768px) {
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 90%;
+    }
+  }
+</style>
+<style>
+  .card-sobre {
+    background-color: #1a1a1f;
+    color: white;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(1, 143, 241, 0.15);
+    text-align: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card-sobre:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-sobre h2 {
+    color: #018ff1;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .card-sobre p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .card-sobre .destaque {
+    color: #00d4ff;
+    font-weight: bold;
+  }
+
+  .card-sobre .assinatura {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .card-sobre {
+      padding: 30px 20px;
+    }
+
+    .card-sobre h2 {
+      font-size: 2rem;
+    }
+
+    .card-sobre p {
+      font-size: 1rem;
+    }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+  }
+
+  .fade-in.aparecer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+<style>
+  .footer {
+    background-color: #0e0e12;
+    color: #ccc;
+    padding: 60px 20px 30px;
+    font-size: 0.95rem;
+    border-top: 1px solid #222;
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 40px;
+  }
+
+  .footer-col {
+    flex: 1 1 250px;
+    min-width: 200px;
+  }
+
+  .footer-logo {
+    height: 40px;
+    margin-bottom: 10px;
+  }
+
+  .footer-slogan {
+    color: #777;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .footer-col h4 {
+    color: #018ff1;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-col a:hover {
+    color: #00f6ff;
+  }
+
+  .footer-redes a {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    color: #555;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-col {
+      margin-bottom: 30px;
+    }
+  }
+</style>
+
+<!-- STYLE DOS CARDS -->
+<style>
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .card {
+    background: #1e1e26;
+    border-radius: 16px;
+    padding: 30px 25px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ccc;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 246, 255, 0.15);
+  }
+
+  .card h3 {
+    color: #018ff1;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    color: #bbb;
+  }
+
+  .card ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+  }
+
+  .card button {
+    background: linear-gradient(90deg, #018ff1 #e7e4e1);
+    color: #0e0e12;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .card button:hover {
+    opacity: 0.85;
+  }
+</style>
+
+<!-- SCRIPT DE ENVIO PARA WHATSAPP -->
+<script>
+  function enviarWhatsApp(servico) {
+    const numero = "5515981703200"; // Substitua pelo seu número
+    const mensagem = encodeURIComponent(`Olá! Gostaria de contratar o serviço de: ${servico}`);
+    window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
+  }
+</script>
+
+
+  <script>
+    function enviarOrcamentoWhatsApp() {
+      const checkboxes = document.querySelectorAll('input[name="opcao"]:checked');
+      if (checkboxes.length === 0) {
+        alert("Por favor, selecione ao menos uma opção.");
+        return;
+      }
+      const opcoesSelecionadas = Array.from(checkboxes).map(cb => cb.value).join(", ");
+      const numero = "5515981703200";
+      const mensagem = encodeURIComponent(`Olá! Gostaria de solicitar um orçamento para: ${opcoesSelecionadas}.`);
+      window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('mouseover', () => link.style.color = '#00f6ff');
+      link.addEventListener('mouseout', () => link.style.color = '#ccc');
+    });
+  function animarAoEntrar(elemento) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aparecer');
+          observer.unobserve(entry.target); // anima uma vez só
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    observer.observe(elemento);
+  }
+
+  const cardSobre = document.getElementById('cardSobre');
+  if (cardSobre) animarAoEntrar(cardSobre);
+
+  document.getElementById("ano").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
